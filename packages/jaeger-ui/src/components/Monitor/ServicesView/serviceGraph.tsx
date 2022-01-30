@@ -41,6 +41,7 @@ type TProps = {
   yDomain?: number[];
   color?: string;
   marginClassName?: string;
+  test?: string;
 };
 
 type TCrossHairValues = {
