@@ -2300,7 +2300,7 @@ exports[`<OperationTableDetails> render some values in the table 1`] = `
                             >
                               <path
                                 className="rv-xy-plot__series rv-xy-plot__series--line area-series-example ops-graph-style"
-                                d="M0,11.88L100,11.88L100,12L0,12Z"
+                                d="M0,0L100,0L100,12L0,12Z"
                                 onClick={[Function]}
                                 onContextMenu={[Function]}
                                 onMouseOut={[Function]}
@@ -2316,7 +2316,7 @@ exports[`<OperationTableDetails> render some values in the table 1`] = `
                               />
                               <path
                                 className="rv-xy-plot__series rv-xy-plot__series--line area-elevated-line-series"
-                                d="M0,11.88L100,11.88"
+                                d="M0,0L100,0"
                                 onClick={[Function]}
                                 onContextMenu={[Function]}
                                 onMouseOut={[Function]}
