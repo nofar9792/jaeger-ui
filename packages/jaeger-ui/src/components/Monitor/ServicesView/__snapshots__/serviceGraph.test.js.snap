@@ -167,6 +167,7 @@ exports[`<ServiceGraph> Base graph should be displayed  1`] = `
       <div
         style={
           Object {
+            "color": "#6B6B76",
             "width": 140,
           }
         }
@@ -287,6 +288,7 @@ exports[`<ServiceGraph> Base graph with custom color should be displayed 1`] = `
       <div
         style={
           Object {
+            "color": "#6B6B76",
             "width": 140,
           }
         }
@@ -411,6 +413,7 @@ exports[`<ServiceGraph> Base graph with horizontal lines should be displayed 1`]
       <div
         style={
           Object {
+            "color": "#6B6B76",
             "width": 140,
           }
         }
@@ -531,6 +534,7 @@ exports[`<ServiceGraph> Base graph with legends should be displayed 1`] = `
       <div
         style={
           Object {
+            "color": "#6B6B76",
             "width": 140,
           }
         }
@@ -672,6 +676,7 @@ exports[`<ServiceGraph> Crosshair map test 1`] = `
       <div
         style={
           Object {
+            "color": "#6B6B76",
             "width": 140,
           }
         }
