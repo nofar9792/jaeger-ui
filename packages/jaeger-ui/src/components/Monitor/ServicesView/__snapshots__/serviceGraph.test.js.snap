@@ -76,7 +76,6 @@ exports[`<ServiceGraph> Base graph should be displayed  1`] = `
     margin={
       Object {
         "bottom": 25,
-        "left": 40,
       }
     }
     onMouseLeave={[Function]}
@@ -198,7 +197,6 @@ exports[`<ServiceGraph> Base graph with custom color should be displayed 1`] = `
     margin={
       Object {
         "bottom": 25,
-        "left": 40,
       }
     }
     onMouseLeave={[Function]}
@@ -320,7 +318,6 @@ exports[`<ServiceGraph> Base graph with horizontal lines should be displayed 1`]
     margin={
       Object {
         "bottom": 25,
-        "left": 40,
       }
     }
     onMouseLeave={[Function]}
@@ -446,7 +443,6 @@ exports[`<ServiceGraph> Base graph with legends should be displayed 1`] = `
     margin={
       Object {
         "bottom": 25,
-        "left": 40,
       }
     }
     onMouseLeave={[Function]}
@@ -589,7 +585,6 @@ exports[`<ServiceGraph> Crosshair map test 1`] = `
     margin={
       Object {
         "bottom": 25,
-        "left": 40,
       }
     }
     onMouseLeave={[Function]}
