@@ -40,8 +40,8 @@ type TProps = {
   yDomain?: number[];
   color?: string;
   marginClassName?: string;
-  selectedTimeFrame: number;
   yAxisTickFormat?: (v: number) => number;
+  xDomain: number[];
 };
 
 type TCrossHairValues = {
@@ -146,14 +146,12 @@ export class ServiceGraphImpl extends React.PureComponent<TProps> {
       marginClassName,
       name,
       error,
-      selectedTimeFrame,
       yAxisTickFormat,
+      xDomain,
     } = this.props;
     let GraphComponent = this.generatePlaceholder(<LoadingIndicator centered />);
     const noDataComponent = this.generatePlaceholder('No Data');
     const apiErrorComponent = this.generatePlaceholder('Couldn’t fetch data');
-    const currentTime = new Date().getTime();
-    const xDomain = [currentTime - selectedTimeFrame, currentTime];
 
     const Plot = () => (
       <XYPlot
