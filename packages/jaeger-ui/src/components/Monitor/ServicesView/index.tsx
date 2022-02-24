@@ -196,8 +196,6 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
     const { services, metrics, selectedTimeFrame, servicesLoading } = this.props;
     const serviceLatencies = metrics.serviceMetrics ? metrics.serviceMetrics.service_latencies : null;
     const displayTimeUnit = calcDisplayTimeUnit(serviceLatencies);
-    const currentTime = Date.now();
-    const xDomain = [currentTime - selectedTimeFrame, currentTime];
 
     if (servicesLoading) {
       return <LoadingIndicator vcentered centered />;
