@@ -108,7 +108,7 @@ const calcDisplayTimeUnit = (serviceLatencies: ServiceMetricsObject | ServiceMet
 // export for tests
 export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, StateType> {
   graphDivWrapper: React.RefObject<HTMLInputElement>;
-  graphXDomain: number[];
+  graphXDomain: number[] = [];
   serviceSelectorValue: string = '';
   endTime: number = Date.now();
   state = {
@@ -120,9 +120,6 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
   constructor(props: TProps) {
     super(props);
     this.graphDivWrapper = React.createRef();
-
-    const currentTime = Date.now();
-    this.graphXDomain = [currentTime - props.selectedTimeFrame, currentTime];
   }
 
   componentDidMount() {
@@ -133,6 +130,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
     }
     window.addEventListener('resize', this.updateDimensions.bind(this));
     this.updateDimensions.apply(this);
+    this.calcGraphXDomain();
   }
 
   componentDidUpdate(nextProps: TProps) {
@@ -143,10 +141,17 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
     } else if (!_isEqual(nextProps.services, services)) {
       this.fetchMetrics();
     }
+
+    this.calcGraphXDomain();
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateDimensions.bind(this));
+  }
+
+  calcGraphXDomain() {
+    const currentTime = Date.now();
+    this.graphXDomain = [currentTime - this.props.selectedTimeFrame, currentTime];
   }
 
   updateDimensions() {
