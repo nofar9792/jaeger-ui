@@ -33,6 +33,7 @@ import { ReduxState } from '../../../types';
 import {
   MetricsAPIQueryParams,
   MetricsReduxState,
+  Points,
   ServiceMetricsObject,
   ServiceOpsMetrics,
 } from '../../../types/metrics';
@@ -103,6 +104,16 @@ const calcDisplayTimeUnit = (serviceLatencies: ServiceMetricsObject | ServiceMet
   }
 
   return getSuitableTimeUnit(maxValue * 1000);
+};
+
+const convertServiceErrorRateToPercentages = (serviceErrorRate: null | ServiceMetricsObject) => {
+  if (!serviceErrorRate) return null;
+
+  const wew = serviceErrorRate.metricPoints.map((metricPoint: Points) => {
+    return { ...metricPoint, y: metricPoint.y! * 100 };
+  });
+
+  return { ...serviceErrorRate, metricPoints: wew };
 };
 
 // export for tests
@@ -201,6 +212,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
     const { services, metrics, selectedTimeFrame, servicesLoading } = this.props;
     const serviceLatencies = metrics.serviceMetrics ? metrics.serviceMetrics.service_latencies : null;
     const displayTimeUnit = calcDisplayTimeUnit(serviceLatencies);
+    const serviceErrorRate = metrics.serviceMetrics ? metrics.serviceMetrics.service_error_rate : null;
 
     if (servicesLoading) {
       return <LoadingIndicator vcentered centered />;
@@ -292,7 +304,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
               loading={metrics.loading}
               name="Error rate, %"
               width={this.state.graphWidth}
-              metricsData={metrics.serviceMetrics ? metrics.serviceMetrics.service_error_rate : null}
+              metricsData={convertServiceErrorRateToPercentages(serviceErrorRate)}
               marginClassName="error-rate-margins"
               color="#CD513A"
               yDomain={[0, 100]}
