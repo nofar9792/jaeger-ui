@@ -107,14 +107,18 @@ const calcDisplayTimeUnit = (serviceLatencies: ServiceMetricsObject | ServiceMet
   return getSuitableTimeUnit(maxValue * 1000);
 };
 
+// export for tests
+export const yAxisTickFormat = (timeInMS: number, displayTimeUnit: string) =>
+  convertToTimeUnit(timeInMS * 1000, displayTimeUnit);
+
 const convertServiceErrorRateToPercentages = (serviceErrorRate: null | ServiceMetricsObject) => {
   if (!serviceErrorRate) return null;
 
-  const wew = serviceErrorRate.metricPoints.map((metricPoint: Points) => {
+  const convertedMetricsPoints = serviceErrorRate.metricPoints.map((metricPoint: Points) => {
     return { ...metricPoint, y: metricPoint.y! * 100 };
   });
 
-  return { ...serviceErrorRate, metricPoints: wew };
+  return { ...serviceErrorRate, metricPoints: convertedMetricsPoints };
 };
 
 // export for tests
@@ -292,14 +296,14 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
                 metrics.serviceError.service_latencies_95
               }
               loading={metrics.loading}
-              name={`Latency, ${convertTimeUnitToShortTerm(displayTimeUnit)}`}
+              name={`Latency (${convertTimeUnitToShortTerm(displayTimeUnit)})`}
               width={this.state.graphWidth}
               metricsData={serviceLatencies}
               showLegend
               marginClassName="latency-margins"
               showHorizontalLines
-              yAxisTickFormat={(timeInMS: number) => convertToTimeUnit(timeInMS * 1000, displayTimeUnit)}
               xDomain={this.state.graphXDomain}
+              yAxisTickFormat={timeInMs => yAxisTickFormat(timeInMs, displayTimeUnit)}
             />
           </Col>
           <Col span={8}>
@@ -307,7 +311,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
               key="errRate"
               error={metrics.serviceError.service_error_rate}
               loading={metrics.loading}
-              name="Error rate, %"
+              name="Error rate (%)"
               width={this.state.graphWidth}
               metricsData={convertServiceErrorRateToPercentages(serviceErrorRate)}
               marginClassName="error-rate-margins"
@@ -321,7 +325,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
               key="requests"
               loading={metrics.loading}
               error={metrics.serviceError.service_call_rate}
-              name="Request rate, req/s"
+              name="Request rate (req/s)"
               width={this.state.graphWidth}
               metricsData={metrics.serviceMetrics ? metrics.serviceMetrics.service_call_rate : null}
               showHorizontalLines
