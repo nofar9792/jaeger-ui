@@ -21,6 +21,7 @@ import prefixUrl from '../../../../utils/prefix-url';
 
 import './index.css';
 import { convertTimeUnitToShortTerm, convertToTimeUnit, getSuitableTimeUnit } from '../../../../utils/date';
+import { trackViewOperationTraces } from '../index.track';
 
 type TProps = {
   data: ServiceOpsMetrics[] | undefined;
@@ -170,6 +171,7 @@ export class OperationTableDetails extends React.PureComponent<TProps, TState> {
                     row.name
                   )}&service=${serviceName}&start=${endTime - lookback}000`
                 )}
+                onClick={trackViewOperationTraces}
                 target="blank"
               >
                 View traces

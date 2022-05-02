@@ -44,6 +44,7 @@ import { convertToTimeUnit, convertTimeUnitToShortTerm, getSuitableTimeUnit } fr
 
 import './index.css';
 import { getConfigValue } from '../../../utils/config/get-config';
+import { trackViewAllTraces, trackSetService, trackSetTimeframe, trackSearchOperation } from './index.track';
 
 type StateType = {
   graphWidth: number;
@@ -70,18 +71,29 @@ type TDispatchProps = {
 
 const Search = Input.Search;
 
-const AdaptedVirtualSelect = reduxFormFieldAdapter({
+const ServiceSelect = reduxFormFieldAdapter({
   AntInputComponent: VirtSelect,
-  onChangeAdapter: option => (option ? (option as any).value : null),
+  onChangeAdapter: option => {
+    trackSetService();
+    return option ? (option as any).value : null;
+  },
+});
+
+const TimeframeSelect = reduxFormFieldAdapter({
+  AntInputComponent: VirtSelect,
+  onChangeAdapter: option => {
+    trackSetTimeframe();
+    return option ? (option as any).value : null;
+  },
 });
 
 const serviceFormSelector = formValueSelector('serviceForm');
 const oneHourInMilliSeconds = 3600000;
 const timeFrameOptions = [
   { label: 'Last Hour', value: oneHourInMilliSeconds },
-  { label: 'Last 2 hour', value: 2 * oneHourInMilliSeconds },
-  { label: 'Last 6 hour', value: 6 * oneHourInMilliSeconds },
-  { label: 'Last 12 hour', value: 12 * oneHourInMilliSeconds },
+  { label: 'Last 2 hours', value: 2 * oneHourInMilliSeconds },
+  { label: 'Last 6 hours', value: 6 * oneHourInMilliSeconds },
+  { label: 'Last 12 hours', value: 12 * oneHourInMilliSeconds },
   { label: 'Last 24 hours', value: 24 * oneHourInMilliSeconds },
   { label: 'Last 2 days', value: 48 * oneHourInMilliSeconds },
 ];
@@ -259,7 +271,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
               <h2 className="service-selector-header">Choose service</h2>
               <Field
                 name="service"
-                component={AdaptedVirtualSelect}
+                component={ServiceSelect}
                 placeholder="Select A Service"
                 props={{
                   className: 'select-a-service-input',
@@ -283,6 +295,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
                         1000)}h&maxDuration&minDuration&service=${this.getSelectedService()}&start=${Date.now() -
                       selectedTimeFrame}000`
                   )}
+                  onClick={trackViewAllTraces}
                   target="blank"
                 >
                   View all traces
@@ -292,7 +305,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
             <Col span={8} className="timeframe-selector">
               <Field
                 name="timeframe"
-                component={AdaptedVirtualSelect}
+                component={TimeframeSelect}
                 placeholder="Select A Timeframe"
                 props={{
                   className: 'select-a-timeframe-input',
@@ -370,6 +383,7 @@ export class MonitorATMServicesViewImpl extends React.PureComponent<TProps, Stat
                   disabled={
                     metrics.operationMetricsLoading === true || metrics.serviceOpsMetrics === undefined
                   }
+                  onBlur={trackSearchOperation}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const filteredData = metrics.serviceOpsMetrics!.filter(({ name }: { name: string }) => {
                       return name.toLowerCase().includes(e.target.value.toLowerCase());

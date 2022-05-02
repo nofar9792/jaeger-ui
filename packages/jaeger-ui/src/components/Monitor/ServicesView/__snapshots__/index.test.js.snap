@@ -57,6 +57,7 @@ exports[`<MonitorATMServicesView> ATM snapshot test 1`] = `
            
           <a
             href="/search?end=1466424490000000&limit=20&lookback=1h&maxDuration&minDuration&service=s1&start=1466420890000000"
+            onClick={[Function]}
             target="blank"
           >
             View all traces
@@ -86,15 +87,15 @@ exports[`<MonitorATMServicesView> ATM snapshot test 1`] = `
                   "value": 3600000,
                 },
                 Object {
-                  "label": "Last 2 hour",
+                  "label": "Last 2 hours",
                   "value": 7200000,
                 },
                 Object {
-                  "label": "Last 6 hour",
+                  "label": "Last 6 hours",
                   "value": 21600000,
                 },
                 Object {
-                  "label": "Last 12 hour",
+                  "label": "Last 12 hours",
                   "value": 43200000,
                 },
                 Object {
@@ -300,6 +301,7 @@ exports[`<MonitorATMServicesView> ATM snapshot test 1`] = `
             disabled={false}
             enterButton={false}
             inputPrefixCls="ant-input"
+            onBlur={[Function]}
             onChange={[Function]}
             placeholder="Search operation"
             prefixCls="ant-input-search"
@@ -447,6 +449,7 @@ exports[`<MonitorATMServicesView> ATM snapshot test with no metrics 1`] = `
            
           <a
             href="/search?end=1466424490000000&limit=20&lookback=1h&maxDuration&minDuration&service=s1&start=1466420890000000"
+            onClick={[Function]}
             target="blank"
           >
             View all traces
@@ -476,15 +479,15 @@ exports[`<MonitorATMServicesView> ATM snapshot test with no metrics 1`] = `
                   "value": 3600000,
                 },
                 Object {
-                  "label": "Last 2 hour",
+                  "label": "Last 2 hours",
                   "value": 7200000,
                 },
                 Object {
-                  "label": "Last 6 hour",
+                  "label": "Last 6 hours",
                   "value": 21600000,
                 },
                 Object {
-                  "label": "Last 12 hour",
+                  "label": "Last 12 hours",
                   "value": 43200000,
                 },
                 Object {
@@ -609,6 +612,7 @@ exports[`<MonitorATMServicesView> ATM snapshot test with no metrics 1`] = `
             disabled={false}
             enterButton={false}
             inputPrefixCls="ant-input"
+            onBlur={[Function]}
             onChange={[Function]}
             placeholder="Search operation"
             prefixCls="ant-input-search"
@@ -756,6 +760,7 @@ exports[`<MonitorATMServicesView> render one service latency 1`] = `
            
           <a
             href="/search?end=1466424490000000&limit=20&lookback=1h&maxDuration&minDuration&service=s1&start=1466420890000000"
+            onClick={[Function]}
             target="blank"
           >
             View all traces
@@ -785,15 +790,15 @@ exports[`<MonitorATMServicesView> render one service latency 1`] = `
                   "value": 3600000,
                 },
                 Object {
-                  "label": "Last 2 hour",
+                  "label": "Last 2 hours",
                   "value": 7200000,
                 },
                 Object {
-                  "label": "Last 6 hour",
+                  "label": "Last 6 hours",
                   "value": 21600000,
                 },
                 Object {
-                  "label": "Last 12 hour",
+                  "label": "Last 12 hours",
                   "value": 43200000,
                 },
                 Object {
@@ -919,6 +924,7 @@ exports[`<MonitorATMServicesView> render one service latency 1`] = `
             disabled={false}
             enterButton={false}
             inputPrefixCls="ant-input"
+            onBlur={[Function]}
             onChange={[Function]}
             placeholder="Search operation"
             prefixCls="ant-input-search"
